@@ -1,28 +1,59 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class GameController : MonoBehaviour {
-    public GameObject blockPrefabs;
+public class GameController : MonoBehaviour
+{
 
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField]
+    private GameObject[] blockPrefabs;
+
+    [SerializeField]
+    private GameManagerObject gameManager;
+
+    [SerializeField]
+    private GameObject nextObjectDisplayParent;
+
+    private GameObject _nextObjectDisplay;
+
+    private GameObject _nextObject;
+
+    private void OnEnable()
     {
-        Coroutine coroutine = StartCoroutine(SpawnBlocks());
+        gameManager.collisionEvent.AddListener(OnCollisionEvent);
     }
 
-    private IEnumerator SpawnBlocks()
+    private void OnDisable()
     {
-        while (true)
-        {
-            Instantiate(blockPrefabs, new Vector3(Random.Range(-2.5f, 2.5f), 6f, 0f), Quaternion.identity);
-            yield return new WaitForSeconds(1.5f);
-        }
+        gameManager.collisionEvent.RemoveListener(OnCollisionEvent);
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnCollisionEvent(bool spawn)
     {
+        SpawnItem();
+    }
 
+    private void Start()
+    {
+        SetNextObject();
+        SpawnItem();
+    }
+
+    private void SpawnItem()
+    {
+        Instantiate(_nextObject, new Vector3(Random.Range(-1.5f, 1.5f), 15f, 0f), Quaternion.identity);
+        SetNextObject();
+    }
+
+    private void SetNextObject()
+    {
+        _nextObject = blockPrefabs[Random.Range(0, blockPrefabs.Length)];
+        DisplayItem();
+    }
+
+    private void DisplayItem()
+    {
+        if (_nextObjectDisplay != null) Destroy(_nextObjectDisplay);
+        _nextObjectDisplay = Instantiate(_nextObject, new Vector3(8.5f, 15.2f, -0.08f), Quaternion.identity, nextObjectDisplayParent.transform);
+        _nextObjectDisplay.transform.localScale = new Vector3(100f, 100f, 100f);
+        _nextObjectDisplay.GetComponent<Rigidbody2D>().isKinematic = true;
     }
 }

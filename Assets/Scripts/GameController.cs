@@ -52,8 +52,13 @@ public class GameController : MonoBehaviour
     private void DisplayItem()
     {
         if (_nextObjectDisplay != null) Destroy(_nextObjectDisplay);
-        _nextObjectDisplay = Instantiate(_nextObject, new Vector3(8.5f, 15.2f, -0.08f), Quaternion.identity, nextObjectDisplayParent.transform);
-        _nextObjectDisplay.transform.localScale = new Vector3(100f, 100f, 100f);
+        _nextObjectDisplay = Instantiate(_nextObject, new Vector3(100, 100, 100), Quaternion.identity);
         _nextObjectDisplay.GetComponent<Rigidbody2D>().isKinematic = true;
+        _nextObjectDisplay.transform.SetParent(nextObjectDisplayParent.transform);
+        _nextObjectDisplay.transform.localPosition = new Vector3(-100f, -135f, 0f);
+        _nextObjectDisplay.transform.localScale = new Vector3(
+            _nextObjectDisplay.transform.localScale.x * 1.25f,
+            _nextObjectDisplay.transform.localScale.y * 1.25f,
+            _nextObjectDisplay.transform.localScale.z * 1.25f);
     }
 }

@@ -1,3 +1,4 @@
+using System.Linq;
 using UnityEngine;
 
 public class GameController : MonoBehaviour
@@ -60,5 +61,28 @@ public class GameController : MonoBehaviour
             _nextObjectDisplay.transform.localScale.x * 1.25f,
             _nextObjectDisplay.transform.localScale.y * 1.25f,
             _nextObjectDisplay.transform.localScale.z * 1.25f);
+    }
+
+    private void FixedUpdate()
+    {
+        var win = CheckWin();
+        if (win)
+        {
+            Debug.Log("Win");
+        }
+    }
+
+    private bool CheckWin()
+    {
+        //cicle all objects of type FallingObject and for those
+        //check if none of them is colliding with hand and
+        //at the same time, if any is colliding with win boundary
+
+        var fallingObjects = FindObjectsOfType<FallingObject>();
+        if (fallingObjects.All(f => !f.isCollidingWithHand))
+        {
+            return fallingObjects.Any(f => f.isCollidingWithWinBound);
+        }
+        return false;
     }
 }

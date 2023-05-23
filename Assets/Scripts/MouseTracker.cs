@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngineInternal;
 
 public class MouseTracker : MonoBehaviour
 {
@@ -39,7 +40,7 @@ public class MouseTracker : MonoBehaviour
             if (Input.GetMouseButtonDown(0))
             {
                 RaycastHit2D hit = Physics2D.Raycast(mousePosition, Vector2.zero);
-                if (hit.collider != null)
+                if (hit.collider != null && hit.collider.CompareTag("Hand"))
                 {
                     // Attach the object
                     attachedObject = hit.collider.gameObject;

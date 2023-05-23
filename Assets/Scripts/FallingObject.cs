@@ -17,6 +17,7 @@ public class FallingObject : MonoBehaviour {
             Debug.Log("Boundary");
             // Handle object falling off the platform
             // End the game or deduct points
+            gameManager.TakeDamage();
             Destroy(gameObject);
         }
 

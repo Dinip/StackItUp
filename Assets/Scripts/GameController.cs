@@ -12,6 +12,9 @@ public class GameController : MonoBehaviour
     [SerializeField]
     private GameObject nextObjectDisplayParent;
 
+    [SerializeField]
+    private GameObject winBoundary;
+
     private GameObject _nextObjectDisplay;
 
     private GameObject _nextObject;
@@ -33,13 +36,32 @@ public class GameController : MonoBehaviour
 
     private void Start()
     {
+        //set winboundary y position
+        //easy 5
+        //medium 10
+        //hard 15
+        var winBoundaryPosition = winBoundary.transform.position;
+        switch (gameManager.difficulty)
+        {
+            case Difficulty.Easy:
+                winBoundaryPosition.y = 5f;
+                break;
+            case Difficulty.Medium:
+                winBoundaryPosition.y = 10f;
+                break;
+            case Difficulty.Hard:
+                winBoundaryPosition.y = 15f;
+                break;
+        }
+        winBoundary.transform.position = winBoundaryPosition;
+
         SetNextObject();
         SpawnItem();
     }
 
     private void SpawnItem()
     {
-        Instantiate(_nextObject, new Vector3(Random.Range(0,0), 15f, 0f), Quaternion.identity);
+        Instantiate(_nextObject, new Vector3(Random.Range(0, 0), 18f, 0f), Quaternion.identity);
         SetNextObject();
     }
 
@@ -55,7 +77,7 @@ public class GameController : MonoBehaviour
         _nextObjectDisplay = Instantiate(_nextObject, new Vector3(100, 100, 100), Quaternion.identity);
         _nextObjectDisplay.GetComponent<Rigidbody2D>().isKinematic = true;
         _nextObjectDisplay.transform.SetParent(nextObjectDisplayParent.transform);
-        _nextObjectDisplay.transform.localPosition = new Vector3(-100f, -135f, 0f);
+        _nextObjectDisplay.transform.localPosition = new Vector3(-125f, -170f, 0f);
         _nextObjectDisplay.transform.localScale = new Vector3(
             _nextObjectDisplay.transform.localScale.x * 1.25f,
             _nextObjectDisplay.transform.localScale.y * 1.25f,

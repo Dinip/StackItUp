@@ -27,7 +27,7 @@ public class MainMenu : MonoBehaviour
 
     public void SelectDifficulty(int difficulty)
     {
-        gm.difficulty = (Difficulty)difficulty;
+        gm.SetDifficulty((Difficulty)difficulty);
         SceneManager.LoadScene("Game");
     }
 

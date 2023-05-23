@@ -1,7 +1,8 @@
 using System.Collections;
 using UnityEngine;
 
-public class FallingObject : MonoBehaviour {
+public class FallingObject : MonoBehaviour
+{
     [SerializeField]
     private GameManagerObject gameManager;
 
@@ -14,9 +15,6 @@ public class FallingObject : MonoBehaviour {
         if (collision.CompareTag("Boundary"))
         {
             SendEvent();
-            Debug.Log("Boundary");
-            // Handle object falling off the platform
-            // End the game or deduct points
             gameManager.TakeDamage();
             Destroy(gameObject);
         }
@@ -24,7 +22,6 @@ public class FallingObject : MonoBehaviour {
 
         if (collision.CompareTag("WinBoundary"))
         {
-            Debug.Log("win enter");
             isCollidingWithWinBound = true;
         }
     }
@@ -33,11 +30,8 @@ public class FallingObject : MonoBehaviour {
     {
         if (collision.collider.CompareTag("Platform") || collision.collider.CompareTag("FallingObject"))
         {
+            PlaySound();
             SendEvent();
-            // Attach the object to the platform
-            //_rb.isKinematic = true;
-            //transform.SetParent(collision.transform);
-            // Adjust any necessary variables or triggers
             return;
         }
 
@@ -51,7 +45,6 @@ public class FallingObject : MonoBehaviour {
     {
         if (collision.CompareTag("WinBoundary"))
         {
-            Debug.Log("win exit");
             isCollidingWithWinBound = false;
         }
     }
@@ -76,6 +69,14 @@ public class FallingObject : MonoBehaviour {
         {
             gameManager.collisionEvent.Invoke(true);
             hasCollided = true;
+        }
+    }
+
+    private void PlaySound()
+    {
+        if (!hasCollided)
+        {
+            GetComponent<AudioSource>().Play();
         }
     }
 }

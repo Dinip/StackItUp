@@ -44,13 +44,13 @@ public class GameController : MonoBehaviour
         switch (gameManager.difficulty)
         {
             case Difficulty.Easy:
-                winBoundaryPosition.y = 5f;
+                winBoundaryPosition.y = 5.625f;
                 break;
             case Difficulty.Medium:
-                winBoundaryPosition.y = 10f;
+                winBoundaryPosition.y = 10.625f;
                 break;
             case Difficulty.Hard:
-                winBoundaryPosition.y = 15f;
+                winBoundaryPosition.y = 14.375f;
                 break;
         }
         winBoundary.transform.position = winBoundaryPosition;
@@ -61,13 +61,13 @@ public class GameController : MonoBehaviour
 
     private void SpawnItem()
     {
-        Instantiate(_nextObject, new Vector3(Random.Range(0, 0), 18f, 0f), Quaternion.identity);
+        Instantiate(_nextObject, new Vector3(Random.Range(-2.5f, 2.5f), 18f, 0f), Quaternion.identity);
         SetNextObject();
     }
 
     private void SetNextObject()
     {
-        _nextObject = blockPrefabs[0];
+        _nextObject = blockPrefabs[Random.Range(0, blockPrefabs.Length)];
         DisplayItem();
     }
 

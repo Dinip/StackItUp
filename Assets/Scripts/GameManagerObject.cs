@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -9,6 +7,8 @@ public class GameManagerObject : ScriptableObject
 {
     [NonSerialized]
     public UnityEvent<bool> collisionEvent;
+
+    public Difficulty difficulty = Difficulty.Easy;
 
     private void OnEnable()
     {

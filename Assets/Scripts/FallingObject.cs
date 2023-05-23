@@ -24,7 +24,7 @@ public class FallingObject : MonoBehaviour {
         if (collision.CompareTag("WinBoundary"))
         {
             Debug.Log("win enter");
-            if (hasCollided) isCollidingWithWinBound = true;
+            isCollidingWithWinBound = true;
         }
     }
 

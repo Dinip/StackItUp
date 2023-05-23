@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour
 {
-
     [SerializeField]
     private GameObject[] blockPrefabs;
 
@@ -40,13 +39,13 @@ public class GameController : MonoBehaviour
 
     private void SpawnItem()
     {
-        Instantiate(_nextObject, new Vector3(Random.Range(-1.5f, 1.5f), 15f, 0f), Quaternion.identity);
+        Instantiate(_nextObject, new Vector3(Random.Range(0,0), 15f, 0f), Quaternion.identity);
         SetNextObject();
     }
 
     private void SetNextObject()
     {
-        _nextObject = blockPrefabs[Random.Range(0, blockPrefabs.Length)];
+        _nextObject = blockPrefabs[0];
         DisplayItem();
     }
 
@@ -81,7 +80,7 @@ public class GameController : MonoBehaviour
         var fallingObjects = FindObjectsOfType<FallingObject>();
         if (fallingObjects.All(f => !f.isCollidingWithHand))
         {
-            return fallingObjects.Any(f => f.isCollidingWithWinBound);
+            return fallingObjects.Any(f => f.hasCollided && f.isCollidingWithWinBound);
         }
         return false;
     }

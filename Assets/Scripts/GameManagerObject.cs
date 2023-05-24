@@ -26,6 +26,8 @@ public class GameManagerObject : ScriptableObject
 
     public int pieces = 0;
 
+    public MouseMode mouseMode = MouseMode.Normal;
+
     private void OnEnable()
     {
         collisionEvent ??= new UnityEvent<bool>();

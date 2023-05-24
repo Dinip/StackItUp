@@ -175,12 +175,12 @@ jobs:
       - uses: actions/download-artifact@v3
         with:
           name: build-WebGL
-          path: build
+          path: build/WebGL
 
       - uses: actions/download-artifact@v3
         with:
           name: build-StandaloneWindows64
-          path: build
+          path: build/StandaloneWindows64
 
       - name: Create Release
         id: create_release

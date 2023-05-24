@@ -44,6 +44,7 @@ public class GameMenus : MonoBehaviour
     {
         pauseMenuUI.SetActive(false);
         Time.timeScale = 1f;
+        Cursor.visible = false;
         gameManager.SetPause(false);
     }
 
@@ -51,6 +52,7 @@ public class GameMenus : MonoBehaviour
     {
         pauseMenuUI.SetActive(true);
         Time.timeScale = 0f;
+        Cursor.visible = true;
         gameManager.SetPause(true);
     }
 
@@ -68,6 +70,7 @@ public class GameMenus : MonoBehaviour
         winLoseMenu.SetActive(false);
         pauseMenuUI.SetActive(false);
         Time.timeScale = 1f;
+        Cursor.visible = false;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
@@ -76,6 +79,7 @@ public class GameMenus : MonoBehaviour
         winLoseMenu.SetActive(true);
 
         Time.timeScale = 0f;
+        Cursor.visible = true;
         gameManager.SetPause(true);
 
         TextMeshProUGUI winTextUI = GameObject.Find("WinText").GetComponent<TextMeshProUGUI>();

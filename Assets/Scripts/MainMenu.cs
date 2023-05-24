@@ -13,6 +13,11 @@ public class MainMenu : MonoBehaviour
     [SerializeField]
     private GameObject difficultyMenu;
 
+    private void Start()
+    {
+        Cursor.visible = true;
+    }
+
     public void StartGame()
     {
         startMenu.SetActive(false);
@@ -24,13 +29,11 @@ public class MainMenu : MonoBehaviour
         Application.Quit();
     }
 
-
     public void SelectDifficulty(int difficulty)
     {
         gm.SetDifficulty((Difficulty)difficulty);
         SceneManager.LoadScene("Game");
     }
-
 
     private void Update()
     {

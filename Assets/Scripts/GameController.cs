@@ -94,10 +94,8 @@ public class GameController : MonoBehaviour
 
     private bool CheckWin()
     {
-        //cicle all objects of type FallingObject and for those
-        //check if none of them is colliding with hand and
-        //at the same time, if any is colliding with win boundary
-
+        //check hand isnt colliding with any falling objects
+        //check any falling objects are colliding with win boundary
         var fallingObjects = FindObjectsOfType<FallingObject>();
         if (fallingObjects.Any(f => f.isCollidingWithHand)) return false;
         return fallingObjects.Any(f => f.hasCollided && f.isCollidingWithWinBound);

@@ -161,38 +161,6 @@ jobs:
           directory: build/WebGL
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
 
-  release:
-    needs: [buildWebGL, buildWindows]
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      deployments: write
-    name: Create Release 🚀
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-
-      - uses: actions/download-artifact@v3
-        with:
-          name: build-WebGL
-          path: build/WebGL
-
-      - uses: actions/download-artifact@v3
-        with:
-          name: build-StandaloneWindows64
-          path: build/StandaloneWindows64
-
-      - name: Create Release
-        id: create_release
-        uses: softprops/action-gh-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: ${{ github.ref }}
-          files: |
-            build/WebGL/*
-            build/StandaloneWindows64/*
-
   # deployPages:
   #   needs: buildWebGL
   #   name: Deploy to Github Pages 🚀

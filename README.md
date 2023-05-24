@@ -1,13 +1,13 @@
 # Stack It Up
 
-**Stack It Up** is an exciting 2D game that combines elements from Tetris and Tower Stack, resulting in a unique gameplay experience. The objective is to stack blocks as high as possible to reach the finish line. Here's a breakdown of the game mechanics:
+**Stack It Up** is an exciting 2D game that combines elements from Tetris and Tower Stack, resulting in a unique gameplay experience. The objective is to stack blocks as high as possible to reach the finish line.
 
 ## Online Version and Builds
 An online version of the game is available at [stack-it-up.dinip.pt](https://stack-it-up.dinip.pt/).
 
 Additionally, you can find builds of the game on the [Releases tab](https://github.com/Dinip/StackItUp/releases).
 
-# Instructions
+# Game Mechanics
 
 ## Controls
 The player uses their mouse, which is equipped with a circle, to interact with the blocks. The circle serves as a pushing mechanism to move the blocks around and stack them.

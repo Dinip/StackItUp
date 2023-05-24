@@ -136,6 +136,7 @@ jobs:
           path: build/Android
 
   deploy:
+    needs: buildWebGL
     runs-on: ubuntu-latest
     permissions:
       contents: read

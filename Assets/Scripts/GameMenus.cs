@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -11,13 +12,19 @@ public class GameMenus : MonoBehaviour
     [SerializeField]
     private GameObject pauseMenuUI;
 
-    // Start is called before the first frame update
-    void Start()
-    {
+    [SerializeField]
+    private GameObject winLoseMenu;
 
+    private void OnEnable()
+    {
+        gameManager.gameOverEvent.AddListener(ShowGameOver);
     }
 
-    // Update is called once per frame
+    private void OnDisable()
+    {
+        gameManager.gameOverEvent.RemoveListener(ShowGameOver);
+    }
+
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -47,7 +54,7 @@ public class GameMenus : MonoBehaviour
         gameManager.SetPause(true);
     }
 
-    public void LoadMenu()
+    public void LoadMainMenu()
     {
         gameManager.SetPause(false);
         Time.timeScale = 1f;
@@ -56,10 +63,29 @@ public class GameMenus : MonoBehaviour
 
     public void ResetGame()
     {
-        //gm.ResetGame();
+        gameManager.ResetGame();
+        gameManager.SetPause(false);
+        winLoseMenu.SetActive(false);
+        pauseMenuUI.SetActive(false);
         Time.timeScale = 1f;
-        //endMenuUI.SetActive(false);
-        //gameUI.SetActive(true);
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    private void ShowGameOver(bool win)
+    {
+        winLoseMenu.SetActive(true);
+
+        Time.timeScale = 0f;
+        gameManager.SetPause(true);
+
+        TextMeshProUGUI winTextUI = GameObject.Find("WinText").GetComponent<TextMeshProUGUI>();
+        TextMeshProUGUI healthTextUI = GameObject.Find("HealthText").GetComponent<TextMeshProUGUI>();
+        TextMeshProUGUI piecesTextUI = GameObject.Find("PiecesText").GetComponent<TextMeshProUGUI>();
+
+        winTextUI.SetText(win ? "You Win! :)" : "You Lost! :(");
+        winTextUI.color = win ? Color.green : Color.red;
+
+        healthTextUI.SetText($"{gameManager.health} hearts left");
+        piecesTextUI.SetText($"{gameManager.pieces} pieces stacked");
     }
 }

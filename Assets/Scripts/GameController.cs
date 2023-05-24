@@ -74,10 +74,10 @@ public class GameController : MonoBehaviour
     private void DisplayItem()
     {
         if (_nextObjectDisplay != null) Destroy(_nextObjectDisplay);
-        _nextObjectDisplay = Instantiate(_nextObject, new Vector3(100, 100, 100), Quaternion.identity);
+        _nextObjectDisplay = Instantiate(_nextObject, new Vector3(85, 85, 85), Quaternion.identity);
         _nextObjectDisplay.GetComponent<Rigidbody2D>().isKinematic = true;
         _nextObjectDisplay.transform.SetParent(nextObjectDisplayParent.transform);
-        _nextObjectDisplay.transform.localPosition = new Vector3(-125f, -170f, 0f);
+        _nextObjectDisplay.transform.localPosition = new Vector3(-125f, -180f, 0f);
         _nextObjectDisplay.transform.localScale = new Vector3(
             _nextObjectDisplay.transform.localScale.x * 1.25f,
             _nextObjectDisplay.transform.localScale.y * 1.25f,
@@ -86,10 +86,9 @@ public class GameController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        var win = CheckWin();
-        if (win)
+        if (CheckWin())
         {
-            Debug.Log("Win");
+            gameManager.gameOverEvent.Invoke(true);
         }
     }
 
@@ -100,10 +99,7 @@ public class GameController : MonoBehaviour
         //at the same time, if any is colliding with win boundary
 
         var fallingObjects = FindObjectsOfType<FallingObject>();
-        if (fallingObjects.All(f => !f.isCollidingWithHand))
-        {
-            return fallingObjects.Any(f => f.hasCollided && f.isCollidingWithWinBound);
-        }
-        return false;
+        if (fallingObjects.Any(f => f.isCollidingWithHand)) return false;
+        return fallingObjects.Any(f => f.hasCollided && f.isCollidingWithWinBound);
     }
 }

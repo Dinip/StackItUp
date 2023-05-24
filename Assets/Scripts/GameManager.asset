@@ -12,3 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc80f248481cb8d4293bdfb09a8a8482, type: 3}
   m_Name: GameManager
   m_EditorClassIdentifier: 
+  isPaused: 1
+  maxTotalHealth: 3
+  maxHealth: 3
+  health: 0
+  pieces: 5

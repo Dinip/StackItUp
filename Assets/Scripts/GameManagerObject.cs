@@ -24,6 +24,7 @@ public class GameManagerObject : ScriptableObject
 
     public int health = 3;
 
+    public int pieces = 0;
 
     private void OnEnable()
     {
@@ -32,6 +33,7 @@ public class GameManagerObject : ScriptableObject
         gameOverEvent ??= new UnityEvent<bool>();
 
         health = maxHealth;
+        pieces = 0;
     }
 
     public void TakeDamage()
@@ -39,7 +41,7 @@ public class GameManagerObject : ScriptableObject
         health--;
         if (health <= 0)
         {
-            gameOverEvent?.Invoke(true);
+            gameOverEvent?.Invoke(false);
         }
     }
 
@@ -52,7 +54,7 @@ public class GameManagerObject : ScriptableObject
     public void ResetGame()
     {
         health = maxHealth;
-        SetPause(false);
+        pieces = 0;
     }
 
     public void SetDifficulty(Difficulty difficulty)

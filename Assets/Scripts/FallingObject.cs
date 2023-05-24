@@ -14,9 +14,13 @@ public class FallingObject : MonoBehaviour
     {
         if (collision.CompareTag("Boundary"))
         {
+            if (hasCollided)
+            {
+                gameManager.pieces--;
+            }
             SendEvent();
-            gameManager.TakeDamage();
             Destroy(gameObject);
+            gameManager.TakeDamage();
         }
 
 
@@ -30,7 +34,7 @@ public class FallingObject : MonoBehaviour
     {
         if (collision.collider.CompareTag("Platform") || collision.collider.CompareTag("FallingObject"))
         {
-            PlaySound();
+            PlaySoundAndAddPiece();
             SendEvent();
             return;
         }
@@ -59,7 +63,7 @@ public class FallingObject : MonoBehaviour
 
     private IEnumerator WaitCollisionEnd()
     {
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(2);
         isCollidingWithHand = false;
     }
 
@@ -72,11 +76,12 @@ public class FallingObject : MonoBehaviour
         }
     }
 
-    private void PlaySound()
+    private void PlaySoundAndAddPiece()
     {
         if (!hasCollided)
         {
             GetComponent<AudioSource>().Play();
+            gameManager.pieces++;
         }
     }
 }

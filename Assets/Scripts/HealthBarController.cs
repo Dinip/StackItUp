@@ -25,7 +25,7 @@ public class HealthBarController : MonoBehaviour
         UpdateHeartsHUD();
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         UpdateHeartsHUD();
     }

@@ -128,6 +128,10 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2029918618664921936, guid: 04b4803056ea66f46832a5ad5a86be8e, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2029918618664921936, guid: 04b4803056ea66f46832a5ad5a86be8e, type: 3}
       propertyPath: m_Offset.x
       value: -0.5
       objectReference: {fileID: 0}
@@ -304,7 +308,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -5, y: -1}
+  m_Offset: {x: 0.5, y: -1}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}

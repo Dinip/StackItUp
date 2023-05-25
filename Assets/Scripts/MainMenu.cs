@@ -75,20 +75,3 @@ public class MainMenu : MonoBehaviour
         }
     }
 }
-
-[Serializable]
-public enum Difficulty : int
-{
-    Easy = 0,
-    Medium = 1,
-    Hard = 2
-}
-
-[Serializable]
-public enum MouseMode : int
-{
-    Normal = 0,
-    Toggle = 1,
-    Hold = 2,
-    Hold_Inv = 3
-}

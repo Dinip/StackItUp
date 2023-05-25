@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -13,7 +11,10 @@ public class GameMenus : MonoBehaviour
     private GameObject pauseMenuUI;
 
     [SerializeField]
-    private GameObject winLoseMenu;
+    private GameObject winMenu;
+
+    [SerializeField]
+    private GameObject loseMenu;
 
     private void OnEnable()
     {
@@ -67,7 +68,8 @@ public class GameMenus : MonoBehaviour
     {
         gameManager.ResetGame();
         gameManager.SetPause(false);
-        winLoseMenu.SetActive(false);
+        winMenu.SetActive(false);
+        loseMenu.SetActive(false);
         pauseMenuUI.SetActive(false);
         Time.timeScale = 1f;
         Cursor.visible = false;
@@ -76,18 +78,15 @@ public class GameMenus : MonoBehaviour
 
     private void ShowGameOver(bool win)
     {
-        winLoseMenu.SetActive(true);
+        winMenu.SetActive(win);
+        loseMenu.SetActive(!win);
 
         Time.timeScale = 0f;
         Cursor.visible = true;
         gameManager.SetPause(true);
 
-        TextMeshProUGUI winTextUI = GameObject.Find("WinText").GetComponent<TextMeshProUGUI>();
         TextMeshProUGUI healthTextUI = GameObject.Find("HealthText").GetComponent<TextMeshProUGUI>();
         TextMeshProUGUI piecesTextUI = GameObject.Find("PiecesText").GetComponent<TextMeshProUGUI>();
-
-        winTextUI.SetText(win ? "You Win! :)" : "You Lost! :(");
-        winTextUI.color = win ? Color.green : Color.red;
 
         healthTextUI.SetText($"{gameManager.health} hearts left");
         piecesTextUI.SetText($"{gameManager.pieces} pieces stacked");

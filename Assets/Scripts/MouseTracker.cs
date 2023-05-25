@@ -51,7 +51,7 @@ public class MouseTracker : MonoBehaviour
 
     private void ToggleMode()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space))
         {
             _selected = !_selected;
         }
@@ -59,12 +59,12 @@ public class MouseTracker : MonoBehaviour
 
     private void HoldMode()
     {
-        _selected = Input.GetMouseButton(0);
+        _selected = Input.GetMouseButton(0) || Input.GetKey(KeyCode.Space);
     }
 
     private void HoldInvMode()
     {
-        _selected = !Input.GetMouseButton(0);
+        _selected = !Input.GetMouseButton(0) && !Input.GetKey(KeyCode.Space);
     }
 
     private void SetColliderAndColor()

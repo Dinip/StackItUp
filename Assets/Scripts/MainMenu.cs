@@ -67,9 +67,14 @@ public class MainMenu : MonoBehaviour
         settingsMenu.SetActive(false);
     }
 
+    public void ShowLeaderboard()
+    {
+        SceneManager.LoadScene("Leaderboard");
+    }
+
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Q))
         {
             ShowInitialMenu();
         }

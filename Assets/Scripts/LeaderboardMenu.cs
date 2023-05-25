@@ -1,7 +1,8 @@
 using LootLocker.Requests;
+using System;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class LeaderboardMenu : MonoBehaviour
 {
@@ -9,7 +10,9 @@ public class LeaderboardMenu : MonoBehaviour
     private TMP_Text[] entries;
 
     [SerializeField]
-    private GameObject[] difficultyButtons;
+    private GameObject difficultyButton;
+
+    private Difficulty _selectedDifficulty = Difficulty.Easy;
 
     private void Start()
     {
@@ -18,7 +21,7 @@ public class LeaderboardMenu : MonoBehaviour
             if (response.success)
             {
                 Debug.Log("Session Started");
-                SelectLeaderboardDifficulty(0);
+                LoadLeaderboard(Difficulty.Easy);
             }
             else
             {
@@ -29,21 +32,21 @@ public class LeaderboardMenu : MonoBehaviour
 
     private void LoadLeaderboard(Difficulty difficulty)
     {
-        LootLockerSDKManager.GetScoreList(Utils.ConvertDifficultyToLeaderboard(difficulty), 7, (response) =>
+        LootLockerSDKManager.GetScoreList(Utils.ConvertDifficultyToLeaderboard(difficulty), 10, (response) =>
         {
             if (response.success)
             {
                 LootLockerLeaderboardMember[] members = response.items;
                 for (int i = 0; i < members.Length; i++)
                 {
-                    entries[i].text = $"{members[i].rank}.{members[i].member_id.Substring(0, members[i].member_id.Length > 9 ? 9 : members[i].member_id.Length)}-{members[i].score}";
+                    entries[i].text = $"{members[i].rank:D2}.{members[i].member_id.Substring(0, members[i].member_id.Length > 8 ? 8 : members[i].member_id.Length)}-{members[i].score}";
                 }
 
                 if (members.Length < entries.Length)
                 {
                     for (int i = members.Length; i < entries.Length; i++)
                     {
-                        entries[i].text = $"{i + 1}.NONE";
+                        entries[i].text = $"{(i + 1):D2}.NONE";
                     }
                 }
             }
@@ -52,19 +55,23 @@ public class LeaderboardMenu : MonoBehaviour
                 Debug.Log("Leaderboard Retrieval Failed");
                 for (int i = 0; i < entries.Length; i++)
                 {
-                    entries[i].text = $"{i + 1}.NONE";
+                    entries[i].text = $"{(i + 1):D2}.NONE";
                 }
             }
         });
     }
 
-    public void SelectLeaderboardDifficulty(int difficulty)
+    public void SelectLeaderboardDifficulty()
     {
-        LoadLeaderboard((Difficulty)difficulty);
-        
-        for (int i = 0; i < difficultyButtons.Length; i++)
-        {
-            difficultyButtons[i].GetComponent<Animator>().SetBool("Selected", i == difficulty);
-        }
+        _selectedDifficulty = (Difficulty)(((int)_selectedDifficulty + 1) % Enum.GetNames(typeof(Difficulty)).Length);
+
+        LoadLeaderboard(_selectedDifficulty);
+
+        difficultyButton.GetComponentInChildren<TMP_Text>().text = $"{_selectedDifficulty}";
+    }
+
+    public void GoToMainMenu()
+    {
+        SceneManager.LoadScene("MainMenu");
     }
 }

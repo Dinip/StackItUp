@@ -61,7 +61,7 @@ public class GameController : MonoBehaviour
 
     private void SpawnItem()
     {
-        Instantiate(_nextObject, new Vector3(Random.Range(-2.5f, 2.5f), 18f, 0f), Quaternion.identity);
+        Instantiate(_nextObject, new Vector3(Random.Range(-2.5f, 2.5f), 25f, 0f), Quaternion.identity);
         SetNextObject();
     }
 

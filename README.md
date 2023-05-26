@@ -12,6 +12,16 @@ Additionally, you can find builds of the game on the [Releases tab](https://gith
 ## Controls
 The player uses their mouse, which is equipped with a circle, to interact with the blocks. The circle serves as a pushing mechanism to move the blocks around and stack them.
 
+### Mouse Modes
+There are different mouse modes available:
+
+- **Normal**: The circle is always active for interaction.
+- **Toggle**: Allows you to toggle the circle between active and inactive states.
+- **Hold**: The circle is always inactive, but you can hold the mouse button or space key to activate it.
+- **Hold_Inv (Hold Inverted)**: The circle is always active, but you can hold the mouse button or space key to deactivate it.
+
+Choose the mouse setting/mode that suits your preferred playstyle.
+
 ## Stacking
 The objective for the player is to strategically stack blocks on a platform, which can come in various shapes such as squares, rectangles, and L-shaped blocks, reminiscent of Tetris-inspired shapes. The goal is to carefully position the blocks to construct a sturdy tower that maintains stability.
 

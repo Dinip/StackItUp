@@ -7,6 +7,9 @@ using UnityEngine.SceneManagement;
 public class LeaderboardMenu : MonoBehaviour
 {
     [SerializeField]
+    private GameManagerObject gameManager;
+
+    [SerializeField]
     private TMP_Text[] entries;
 
     [SerializeField]

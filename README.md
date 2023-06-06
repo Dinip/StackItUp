@@ -28,9 +28,6 @@ The objective for the player is to strategically stack blocks on a platform, whi
 ## Game Difficulty
 The game offers multiple difficulty levels, which determine the height of the finish line and the number of hearts the player has. The higher the difficulty, the taller the finish line and the fewer hearts the player gets.
 
-### Difficulty Menu
-![Difficulty Menu](Images/Menu_Difficulty.png)
-
 ## Heart System
 The player starts with a certain number of hearts, which represent their lives. If a block falls off the bottom platform or slips off the sides, the player loses a heart. The game continues until the player runs out of hearts.
 

@@ -59,6 +59,7 @@ public class GameMenus : MonoBehaviour
 
     public void LoadMainMenu()
     {
+        gameManager.ResetGame();
         gameManager.SetPause(false);
         Time.timeScale = 1f;
         SceneManager.LoadScene("MainMenu");

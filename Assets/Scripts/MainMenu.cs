@@ -22,6 +22,8 @@ public class MainMenu : MonoBehaviour
 
     private void Start()
     {
+        var mouseMode = Math.Clamp(PlayerPrefs.GetInt("mouseMode"), 0, Enum.GetNames(typeof(MouseMode)).Length - 1);
+        gm.mouseMode = (MouseMode)mouseMode;
         Cursor.visible = true;
     }
 
@@ -41,6 +43,7 @@ public class MainMenu : MonoBehaviour
     public void ChangeMouseMode()
     {
         gm.mouseMode = (MouseMode)(((int)gm.mouseMode + 1) % Enum.GetNames(typeof(MouseMode)).Length);
+        PlayerPrefs.SetInt("mouseMode", (int)gm.mouseMode);
         SetMouseModeText();
     }
 
